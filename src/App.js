@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import { MoviesData } from './assets/MoviesData'
+import MoviesList from './components/MoviesList'
+import Navbar from './components/Navbar'
+ 
+
+import './App.css'
 
 function App() {
+  const [MovieData,setMovieData] = useState(MoviesData);
+  const [Search , setSearch]=useState('');
+  const handleSearch=(e)=>setSearch(e.target.value);
+ const addMovie = (newMovie) => setMovieData([...MovieData ,newMovie]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container-fluid'> 
+  
+   <Navbar
+    handleSearch={handleSearch}
+    handleAdd={addMovie}
+   />
+    
+    <MoviesList
+      
+  MoviesArray={
+    Search ? MovieData.filter((movie)=>
+    movie.title.toLowerCase().includes(Search.toLowerCase())
+    )
+    :MovieData
+  }
+   />
+  
     </div>
-  );
+ 
+
+
+  )
+
 }
 
 export default App;
