@@ -2,6 +2,7 @@ import React from 'react'
 import { Input } from 'reactstrap'
 import AddMovie from './AddMovie'
 
+
 const SearchBar = ({handleSearch ,  handleAdd}) => {
   return (
     <div className='row m-2 '>
